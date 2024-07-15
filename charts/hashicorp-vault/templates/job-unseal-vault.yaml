@@ -17,6 +17,7 @@ spec:
               cat /vault-unseal-config/unseal.sh | oc exec -i -n vault vault-0 -c vault "--" sh -c "cat > /vault/data/unseal.sh"
               oc exec vault-0 --namespace=vault --stdin --tty -- /bin/sh /vault/data/unseal.sh
 
+              echo "enable secret engine transit-----"
               cat /vault-enable-transit/enable-transit.sh | oc exec -i -n vault vault-0 -c vault "--" sh -c "cat > /vault/data/enable-transit.sh"
               oc exec vault-0 --namespace=vault --stdin --tty -- /bin/sh /vault/data/enable-transit.sh
         image: registry.redhat.io/openshift4/ose-cli:v4.7

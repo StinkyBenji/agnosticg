@@ -11,4 +11,4 @@ data:
     vault write -f transit/keys/cosign type="rsa-2048"
     vault policy write cosign /vault/data/cosign-policy/cosign.hcl
 
-    export COSIGN_TOKEN=$(vault token create -policy=cosign -format=yaml | grep -E "client_token" | sed 's/^.*://')
+    vault token create -policy=cosign -format=yaml > /vault/data/cosign-token.yaml

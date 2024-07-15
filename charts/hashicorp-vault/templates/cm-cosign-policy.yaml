@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cosign-policy-cm
+data: 
+  cosign.hcl: |
+    path "transit/keys/cosign" {
+      capabilities = ["read"]
+    }
+
+    path "transit/hmac/cosign/*" {
+      capabilities = ["update"]
+    }
+
+    path "transit/sign/cosign/*" {
+      capabilities = ["update"]
+    }
+
+    path "transit/verify/cosign" {
+      capabilities = ["create"]
+    }
+
+    path "transit/verify/cosign/*" {
+      capabilities = ["update"]
+    }

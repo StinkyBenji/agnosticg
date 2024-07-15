@@ -127,6 +127,8 @@ spec:
         volumeMounts:
         - mountPath: /vault/data
           name: data
+        - mountPath: /vault/data/cosign.hcl
+          name: cosign-policy-cm
         - mountPath: /vault/config
           name: config
         - mountPath: /home/vault
@@ -142,6 +144,10 @@ spec:
           defaultMode: 420
           name: vault-config
         name: config
+      - configMap:
+          defaultMode: 420
+          name: cosign-policy-cm
+        name: cosign-policy-cm
       - name: home
   updateStrategy:
     type: OnDelete

@@ -9,7 +9,6 @@ data:
         vault operator unseal -tls-skip-verify $(grep -A 5 unseal_keys_b64 /vault/data/vault-auto-unseal-keys.txt |head -2|tail -1|sed 's/- //g')
         vault operator unseal -tls-skip-verify $(grep -A 5 unseal_keys_b64 /vault/data/vault-auto-unseal-keys.txt |head -3|tail -1|sed 's/- //g')
         vault operator unseal -tls-skip-verify $(grep -A 5 unseal_keys_b64 /vault/data/vault-auto-unseal-keys.txt |head -4|tail -1|sed 's/- //g')
-        export VAULT_TOKEN=$(grep -E "root_token" /vault/data/vault-auto-unseal-keys.txt | sed 's/^.*://')
     }
 
     FILE=/vault/data/vault-auto-unseal-keys.txt

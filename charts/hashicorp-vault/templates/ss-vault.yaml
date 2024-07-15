@@ -127,7 +127,7 @@ spec:
         volumeMounts:
         - mountPath: /vault/data
           name: data
-        - mountPath: /vault/data/cosign.hcl
+        - mountPath: /vault/data/cosign-policy
           name: cosign-policy-cm
         - mountPath: /vault/config
           name: config

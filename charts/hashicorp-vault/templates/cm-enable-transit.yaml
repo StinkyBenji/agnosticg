@@ -8,8 +8,8 @@ data:
       echo "enable transit secret engine-----"
       vault secrets enable transit
       vault write -f transit/keys/cosign type="rsa-2048"
-      vault policy write cosign /vault/data/cosign.hcl 
-      export COSIGN_TOKEN=$(vault token create -policy=cosign -format=json | jq -r '.auth | .client_token')
+      vault policy write cosign /vault/data/cosign-policy/cosign.hcl
+      export COSIGN_TOKEN=$(vault token create -policy=cosign -format=yaml | grep -E "client_token" | sed 's/^.*://')
     }
 
     vault status

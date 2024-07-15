@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: unseal-volt
 spec:
+  podReplacementPolicy: TerminatingOrFailed
   template:
     spec:
       containers:

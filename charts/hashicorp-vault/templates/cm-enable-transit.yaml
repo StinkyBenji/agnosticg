@@ -8,7 +8,7 @@ data:
 
     echo "enable transit secret engine-----"
     vault secrets enable transit
-    vault write -f transit/keys/cosign type="rsa-2048"
+    vault write -f transit/keys/cosign type="ecdsa-p256"
     vault policy write cosign /vault/data/cosign-policy/cosign.hcl
 
     vault token create -policy=cosign -format=yaml > /vault/data/cosign-token.yaml

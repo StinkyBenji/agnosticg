@@ -12,7 +12,7 @@ spec:
           - -c
           - |
             oc wait --for=condition=Ready=true -n vault pod/vault-0
-            
+            oc wait --for=condition=complete=true -n vault jobs/unseal-volt
             echo "enable secret engine transit-----"
             
             cat /vault-enable-transit/enable-transit.sh | oc exec -i -n vault vault-0 -c vault "--" sh -c "cat > /vault/data/enable-transit.sh"

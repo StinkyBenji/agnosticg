@@ -34,10 +34,10 @@ spec:
           name: vault-enable-transit
       restartPolicy: Never
       serviceAccount: vault
-    volumes:
-      - name: vault-unseal-config-volume
-        configMap:
-          name: vault-unseal-config
-      - name: vault-enable-transit
-        configMap:
-          name: vault-enable-transit-cm
+      volumes:
+        - name: vault-unseal-config-volume
+          configMap:
+            name: vault-unseal-config
+        - name: vault-enable-transit
+          configMap:
+            name: vault-enable-transit-cm

@@ -4,11 +4,22 @@ metadata:
   name:  vault-enable-transit-cm
 data:
   enable-transit.sh: |
-    export VAULT_TOKEN=$(grep -E "root_token" /vault/data/vault-auto-unseal-keys.txt | sed 's/^.*://')
+    enable_transit() {
+      echo "enable transit secret engine-----"
+      vault secrets enable transit
+      vault write -f transit/keys/cosign type="ecdsa-p256"
+      vault policy write cosign /vault/data/cosign-policy/cosign.hcl
+      vault token create -policy=cosign -format=yaml > /vault/data/cosign-token.yaml
+    }
 
-    echo "enable transit secret engine-----"
-    vault secrets enable transit
-    vault write -f transit/keys/cosign type="ecdsa-p256"
-    vault policy write cosign /vault/data/cosign-policy/cosign.hcl
+    FILE=/vault/data/vault-auto-unseal-keys.txt
+    if [ ! -f "$FILE" ]; then
+        exit 0
+    else
+      export VAULT_TOKEN=$(grep -E "root_token" /vault/data/vault-auto-unseal-keys.txt | sed 's/^.*://')
+    
+      enable_transit
+      exit 0
+    fi
 
-    vault token create -policy=cosign -format=yaml > /vault/data/cosign-token.yaml
+
